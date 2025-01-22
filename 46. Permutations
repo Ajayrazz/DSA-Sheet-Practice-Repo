@@ -1,0 +1,26 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> allList = new ArrayList<>();
+        Helper(allList, new ArrayList<>(), nums);
+        return allList;
+    }
+
+    private void Helper(List<List<Integer>> allList, List<Integer> currentList, int[] nums){
+        if(currentList.size() == nums.length){
+            allList.add(new ArrayList<>(currentList));
+        }
+
+        for(int num : nums){
+            //if contains
+            if(currentList.contains(num)){
+                continue;
+            }
+            //if not contains
+            currentList.add(num);
+            //recalling itself
+            Helper(allList, currentList, nums);
+            //remove last element
+            currentList.remove(currentList.size() - 1);
+        }
+    }
+}
